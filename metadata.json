@@ -1,0 +1,11 @@
+{
+	"id": "susMod",
+	"name": "Suspicious Mod",
+	"display_name": "Suspicious Mod",
+	"author": ["Astro"],
+	"description": "Adds Among Us-related features to the game, including a new suit: Sus.",
+	"prefix": "susMod",
+	"main_file": "susmod.lua",
+	"version": "1.0.0",
+	"dependencies": ["Steamodded (>=1.0.0~ALPHA-1308a)"]
+}
