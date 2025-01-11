@@ -5,6 +5,10 @@ The new suit, **Sus**, comes with its own set of poker hands.
 
 <img src="gh_assets/Additions.png">
 
+---
+#### Note: Using 'The Sus' Tarot then hovering over 'The Fool' crashes the game. This is a known issue. 
+---
+
 ## Features
 - New Suit: **Sus**
 - 8 New Poker Hands
