@@ -13,7 +13,7 @@ The new suit, **Sus**, comes with its own set of poker hands.
 ## Features
 - New Suit: **Sus**
 - `8` New Poker Hands
-- `3`^[1] New Decks
+- `3`[^1] New Decks
 - `1` New Tarot Card
 - New Consumable: **Bean Cards**
   - Bean Cards are a special type of Planet Card, but for the execlusive **Sus Poker Hands**
@@ -24,7 +24,7 @@ The new suit, **Sus**, comes with its own set of poker hands.
 - `2` New Jokers
 - `2` New Vouchers
 
-^[1]: **Full Deck** is only included if **Card Sleeves** is not installed.
+[^1]: **Full Deck** is only included if **Card Sleeves** is not installed.
 
 ## Requirements
 - **[Steamodded](https://github.com/Steamopollys/Steamodded) v1.0.0~BETA-0301a** or higher.
