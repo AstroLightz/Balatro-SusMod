@@ -30,8 +30,17 @@ SMODS.Booster{
     end,
 
     create_card = function(self, card, i)
-        local _card = create_card('Bean', G.pack_cards, nil, nil, true, nil)
+        local _card = SMODS.create_card({
+            set = 'Bean',
+            area = G.pack_cards,
+            skip_materialize = true
+        })
+
         return _card
+    end,
+
+    get_weight = function(self)
+        return G.GAME.bean_rate * self.weight
     end
 }
 
@@ -66,7 +75,12 @@ SMODS.Booster{
     end,
 
     create_card = function(self, card, i)
-        local _card = create_card('Bean', G.pack_cards, nil, nil, true, nil)
+        local _card = SMODS.create_card({
+            set = 'Bean',
+            area = G.pack_cards,
+            skip_materialize = true
+        })
+
         return _card
     end
 }
@@ -102,7 +116,12 @@ SMODS.Booster{
     end,
 
     create_card = function(self, card, i)
-        local _card = create_card('Bean', G.pack_cards, nil, nil, true, nil)
+        local _card = SMODS.create_card({
+            set = 'Bean',
+            area = G.pack_cards,
+            skip_materialize = true
+        })
+
         return _card
     end
 }
@@ -141,11 +160,15 @@ SMODS.Booster{
     end,
 
     create_card = function(self, card, i)
+        local _card = SMODS.create_card({
+            set = (pseudorandom(pseudoseed('stdset'..G.GAME.round_resets.ante)) > 0.6) and "Enhanced" or "Base",
+            area = G.pack_cards,
+            skip_materialize = true
+        })
 
-        local _card = create_card((pseudorandom(pseudoseed('stdset'..G.GAME.round_resets.ante)) > 0.6) and "Enhanced" or "Base", G.pack_cards, nil, nil, true, nil)
-        assert(SMODS.change_base(_card, sus_suit.key))
+        assert(SMODS.change_base(_card, SUS_SUIT.key))
+
         return _card
-
     end
 }
 
@@ -180,11 +203,15 @@ SMODS.Booster{
     end,
 
     create_card = function(self, card, i)
+        local _card = SMODS.create_card({
+            set = (pseudorandom(pseudoseed('stdset'..G.GAME.round_resets.ante)) > 0.6) and "Enhanced" or "Base",
+            area = G.pack_cards,
+            skip_materialize = true
+        })
 
-        local _card = create_card((pseudorandom(pseudoseed('stdset'..G.GAME.round_resets.ante)) > 0.6) and "Enhanced" or "Base", G.pack_cards, nil, nil, true, nil)
-        assert(SMODS.change_base(_card, sus_suit.key))
+        assert(SMODS.change_base(_card, SUS_SUIT.key))
+
         return _card
-
     end
 }
 
@@ -219,10 +246,14 @@ SMODS.Booster{
     end,
 
     create_card = function(self, card, i)
+        local _card = SMODS.create_card({
+            set = (pseudorandom(pseudoseed('stdset'..G.GAME.round_resets.ante)) > 0.6) and "Enhanced" or "Base",
+            area = G.pack_cards,
+            skip_materialize = true
+        })
 
-        local _card = create_card((pseudorandom(pseudoseed('stdset'..G.GAME.round_resets.ante)) > 0.6) and "Enhanced" or "Base", G.pack_cards, nil, nil, true, nil)
-        assert(SMODS.change_base(_card, sus_suit.key))
+        assert(SMODS.change_base(_card, SUS_SUIT.key))
+
         return _card
-
     end
 }

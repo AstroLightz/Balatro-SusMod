@@ -30,7 +30,7 @@ base_sus_flush = SMODS.PokerHand{
         -- Check if all cards played are sus suit
         local flush_count = 0
         for i=1, #hand do
-            if hand[i]:is_suit(sus_suit.key) then
+            if hand[i]:is_suit(SUS_SUIT.key) then
                 flush_count = flush_count + 1
             end
         end
@@ -75,7 +75,7 @@ str_sus_flush = SMODS.PokerHand{
         -- Check if all cards played are sus suit
         local flush_count = 0
         for i=1, #hand do
-            if hand[i]:is_suit(sus_suit.key) then
+            if hand[i]:is_suit(SUS_SUIT.key) then
                 flush_count = flush_count + 1
             end
         end
@@ -120,7 +120,7 @@ sus_flush_house = SMODS.PokerHand{
         -- Check if all cards played are sus suit
         local flush_count = 0
         for i=1, #hand do
-            if hand[i]:is_suit(sus_suit.key) then
+            if hand[i]:is_suit(SUS_SUIT.key) then
                 flush_count = flush_count + 1
             end
         end
@@ -164,7 +164,7 @@ sus_flush_five = SMODS.PokerHand{
         -- Check if all cards played are sus suit
         local flush_count = 0
         for i=1, #hand do
-            if hand[i]:is_suit(sus_suit.key) then
+            if hand[i]:is_suit(SUS_SUIT.key) then
                 flush_count = flush_count + 1
             end
         end
@@ -213,7 +213,7 @@ sus_pair = SMODS.PokerHand{
             local pair_c1 = pair[1]
             local pair_c2 = pair[2]
 
-            if pair_c1:is_suit(sus_suit.key) and pair_c2:is_suit(sus_suit.key) then
+            if pair_c1:is_suit(SUS_SUIT.key) and pair_c2:is_suit(SUS_SUIT.key) then
                 sus_pair = true
             end
             
@@ -260,7 +260,7 @@ sus_two_pair = SMODS.PokerHand{
 
             for i=1, #parts._2 do
                 for j=1, #parts._2[i] do
-                    if parts._2[i][j]:is_suit(sus_suit.key) then
+                    if parts._2[i][j]:is_suit(SUS_SUIT.key) then
                         two_sus_pair = two_sus_pair + 1
                     end
                 end
@@ -308,7 +308,7 @@ triple_sus = SMODS.PokerHand{
             local sus_count = 0
 
             for i=1, #parts._3[1] do
-                if parts._3[1][i]:is_suit(sus_suit.key) then
+                if parts._3[1][i]:is_suit(SUS_SUIT.key) then
                     sus_count = sus_count + 1
                 end
             end
@@ -354,7 +354,7 @@ quadruple_sus = SMODS.PokerHand{
             local sus_count = 0
 
             for i=1, #parts._4[1] do
-                if parts._4[1][i]:is_suit(sus_suit.key) then
+                if parts._4[1][i]:is_suit(SUS_SUIT.key) then
                     sus_count = sus_count + 1
                 end
             end

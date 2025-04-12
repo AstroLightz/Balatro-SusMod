@@ -1,5 +1,5 @@
 -- Amogus Suit
-sus_suit = SMODS.Suit{
+SUS_SUIT = SMODS.Suit{
     key = 'Sus',
     card_key = 'SUS',
 
@@ -28,7 +28,7 @@ sus_suit = SMODS.Suit{
 }
 
 -- Setup Localiation Colors
-G.C.SUITS.Sus = HEX('EE54BA')
+G.C.SUS = HEX('EE54BA')
 G.C.BEAN = HEX('F03463')
 G.C.SUSSY = HEX('C252B5')
 
@@ -40,27 +40,19 @@ function loc_colour(_c, _default)
     end
 
     -- Define custom colors
-    G.ARGS.LOC_COLOURS.sus = G.C.SUITS.Sus
+    G.ARGS.LOC_COLOURS.sus = G.C.SUS
     G.ARGS.LOC_COLOURS.bean = G.C.BEAN
 
     return lc(_c, _default)
 
 end
 
--- Load needed files
-assert(SMODS.load_file('atlases.lua'))()
-assert(SMODS.load_file('poker_hands.lua'))()
-assert(SMODS.load_file('jokers.lua'))()
-assert(SMODS.load_file('decks.lua'))()
-assert(SMODS.load_file('beans.lua'))()
-assert(SMODS.load_file('boosters.lua'))()
-
 -- Bean Card Collectibles
 SMODS.ConsumableType{
     key = 'Bean',
 
     collection_rows = {4, 4},
-    shop_rate = 0,
+    shop_rate = 0.5,
 
     primary_colour = HEX('F03463'),
     secondary_colour = HEX('E92D5C'),
@@ -87,12 +79,21 @@ SMODS.UndiscoveredSprite{
     pos = { x = 0, y = 1 }
 }
 
+-- Load needed files
+assert(SMODS.load_file('atlases.lua'))()
+assert(SMODS.load_file('poker_hands.lua'))()
+assert(SMODS.load_file('jokers.lua'))()
+assert(SMODS.load_file('beans.lua'))()
+assert(SMODS.load_file('boosters.lua'))()
+assert(SMODS.load_file('vouchers.lua'))()
+assert(SMODS.load_file('decks.lua'))()
 
-
-
+-- Load card sleeves file if CardSleeves is installed
+if CardSleeves then
+    SMODS.load_file('cardsleeves.lua')()
+end
 
 -- Sus Suit Tarot
--- TODO: Fix crashing when using and hovering over The Fool
 SMODS.Consumable{
     key = 'The_Sus',
     set = 'Tarot',
@@ -101,14 +102,14 @@ SMODS.Consumable{
         text = {
             'Converts up to',
             '{C:attention}#1#{} selected cards',
-            'to {V:1}#2#{} cards',
+            'to {C:sus}Sus{} cards',
         }
     },
 
     config = { extra = {
         convert_num = 3,
         suit_name = 'Sus',
-        suit = sus_suit.key
+        suit = SUS_SUIT.key
     }},
 
     loc_vars = function(self, info_queue, center)
@@ -163,7 +164,7 @@ SMODS.Consumable{
         for i=1, #G.hand.highlighted do
             G.E_MANAGER:add_event(Event({
                 trigger = 'after',delay = 0.1,func = function()
-                    SMODS.change_base(G.hand.highlighted[i], card.ability.extra.suit)
+                    assert(SMODS.change_base(G.hand.highlighted[i], card.ability.extra.suit))()
                     return true
                 end 
             }))
@@ -215,7 +216,7 @@ SMODS.Blind{
 
     discovered = false,
     debuff = {
-        suit = sus_suit.key
+        suit = SUS_SUIT.key
     }
 }
 

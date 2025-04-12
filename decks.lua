@@ -1,6 +1,6 @@
 -- Decks
-susDeck = SMODS.Back{
-    key = 'susDeck',
+SMODS.Back{
+    key = 'sus',
     loc_txt = {
         name = 'Suspicious Deck',
         text = {
@@ -12,27 +12,18 @@ susDeck = SMODS.Back{
     atlas = 'DecksA',
     pos = {x = 0, y = 0},
 
-    apply = function ()
+    apply = function (self, back)
         
         G.E_MANAGER:add_event(Event({
 
             func = function ()
-                
-                -- Remove all cards in deck
-                -- while #G.playing_cards ~= 0 do                    
-                --     G.playing_cards[1]:remove()
-                -- end
 
+                -- Convert all cards to Sus
                 for _, card in ipairs(G.playing_cards) do
-                    if card.base.suit ~= sus_suit.key then
-                        assert(SMODS.change_base(card, sus_suit.key))
+                    if card.base.suit ~= SUS_SUIT.key then
+                        assert(SMODS.change_base(card, SUS_SUIT.key))
                     end
                 end
-
-                -- local _card = SMODS.create_card({
-                --     set = 'Base',
-                --     skip_materialize = true,
-                -- })
 
                 return true
             end
@@ -41,31 +32,85 @@ susDeck = SMODS.Back{
     end
 }
 
--- -- Full Deck: 52 + 16 Sus cards
--- fullDeck = SMODS.Back{
---     key = 'fullDeck',
---     loc_txt = {
---         name = 'Full Deck',
---         text = {
---             'The deck is looking',
---             'a bit {C:sus}Sus{}'
---         }
---     },
+-- Full Deck: 52 + 16 Sus cards
+-- Only define if CardSleeves is not installed
+if not CardSleeves then
+    SMODS.Back{
+        key = 'full',
+        loc_txt = {
+            name = 'Full Deck',
+            text = {
+                'Start run with {C:sus}Sus{}',
+                'suit in deck'
+            }
+        },
 
---     atlas = 'DecksA',
---     pos = {x = 1, y = 0},
+        atlas = 'DecksA',
+        pos = {x = 1, y = 0},
 
---     apply = function ()
-        
---         G.E_MANAGER:add_event(Event({
+        apply = function (self, back)
+            
+            -- Allow Sus cards to be added to the deck
+            SUS_SUIT.in_pool = nil
 
---             func = function ()
-                
-                
+        end
+    }
+end
 
---                 return true
---             end
---         }))
+-- Crewmate Deck: Start with Bean Merchant and two random Bean cards
+SMODS.Back{
+    key = 'crewmate',
+    loc_txt = {
+        name = 'Crewmate Deck',
+        text = {
+            'Start run with the',
+            '{C:attention,T:v_susMod_bean_merchant}Bean Merchant{} voucher',
+            '2 {C:bean}Bean{} cards, and',
+            '{C:attention}26{} {C:sus}Sus{} cards'
+        }
+    },
 
---     end
--- }
+    atlas = 'DecksA',
+    pos = {x = 2, y = 0},
+
+    set = 'Back',
+    config = {
+        voucher = 'v_susMod_bean_merchant'
+    },
+
+    apply = function (self, back)
+       
+        G.E_MANAGER:add_event(Event({
+
+            func = function ()
+
+                -- Convert half the deck to Sus
+                i = 0
+                for _, card in ipairs(G.playing_cards) do
+                    if i < 26 then
+                        if card.base.suit ~= SUS_SUIT.key then
+                            assert(SMODS.change_base(card, SUS_SUIT.key))
+                        end
+                    end
+                    i = i + 1
+                end
+
+                -- Add two random Bean cards
+                for _ = 1, 2 do
+                    
+                    local _card = SMODS.create_card({
+                        set = 'Bean',
+                        area = G.consumeables
+                    })
+
+                    G.consumeables:emplace(_card)
+
+                end
+
+                return true
+            end
+        }))
+
+    end
+
+}

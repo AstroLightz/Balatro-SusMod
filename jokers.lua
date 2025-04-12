@@ -15,7 +15,7 @@ SMODS.Joker{
 
     config = { extra = {
             s_mult = 3,
-            suit = sus_suit.key,
+            suit = SUS_SUIT.key,
     }},
 
     loc_vars = function(self, info_queue, center)
@@ -38,7 +38,7 @@ SMODS.Joker{
         -- Recreation of vanilla Suit Mult jokers
         if context.individual and
         context.cardarea == G.play and
-        context.other_card:is_suit(sus_suit.key) then
+        context.other_card:is_suit(SUS_SUIT.key) then
             
             return {
                 mult = card.ability.extra.s_mult,
@@ -60,7 +60,7 @@ SMODS.Joker{
             'contains a {C:sus}Sus{} card. {X:mult,C:white}X#2#{} Mult',
             'if played hand is a {C:sus}Sus poker hand{}',
             '{C:green}#3# in #4#{} chance all non-{C:sus}Sus{}',
-            'cards played are {C:red}destroyed{}',
+            'cards played are {C:attention}converted{}',
             '{s:0.8,X:mult,C:white}Xmult{s:0.8,C:inactive} does not stack'
         }
     },
@@ -128,7 +128,7 @@ SMODS.Joker{
                 
                 -- Check if played hand contains a sus card
                 for _, sCard in ipairs(context.scoring_hand) do
-                    if sCard:is_suit(sus_suit.key) then
+                    if sCard:is_suit(SUS_SUIT.key) then
                         return {
                             message = 'X'..card.ability.extra.sus_mult,
                             Xmult_mod = card.ability.extra.sus_mult,
@@ -148,12 +148,23 @@ SMODS.Joker{
 
             if roll < G.GAME.probabilities.normal/card.ability.extra.odds then
                 
-                -- Destroy all non-Sus cards scored
-                for _, card in ipairs(context.scoring_hand) do
-                    if not card:is_suit(sus_suit.key) then
-                        card:start_dissolve()
+                G.E_MANAGER:add_event(Event({
+
+                    func = function()
+
+                        -- Convert all non-Sus cards played to Sus cards
+                        for _, card in ipairs(context.scoring_hand) do
+                            
+                            if not card:is_suit(SUS_SUIT.key) then
+                                assert(SMODS.change_base(card, SUS_SUIT.key))
+                            end
+
+                        end
+
+                        return true
                     end
-                end
+
+                }))
 
                 return {
                     message = 'Imposter!',

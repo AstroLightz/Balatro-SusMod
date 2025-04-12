@@ -6,6 +6,11 @@
 	"description": "Adds Among Us-related features to the game, including a new suit: Sus.",
 	"prefix": "susMod",
 	"main_file": "susmod.lua",
-	"version": "1.0.0",
-	"dependencies": ["Steamodded (>=1.0.0~ALPHA-1308a)"]
+	"priority": 15,
+	"badge_colour": "EE54BA",
+	"version": "1.1.0",
+	"dependencies": [
+		"Steamodded (>=1.0.0~BETA-0301a)",
+		"Lovely (>=0.6.0)"
+	]
 }

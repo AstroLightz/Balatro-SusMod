@@ -102,3 +102,19 @@ SMODS.Atlas{
     px = 71,
     py = 95
 }
+
+-- Vouchers
+SMODS.Atlas{
+    key = 'VouchersA',
+    path = 'SusMod_Vouchers.png',
+    px = 71,
+    py = 95
+}
+
+-- Suspicious Sleeve
+SMODS.Atlas{
+    key = 'SleevesA',
+    path = 'SusMod_Sleeves.png',
+    px = 73,
+    py = 95
+}
