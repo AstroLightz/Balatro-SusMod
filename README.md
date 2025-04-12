@@ -1,4 +1,8 @@
+<div align="center">
+
 <img src="gh_assets/Mod_Balatro_Title.png">
+
+</div>
 
 ## Description
 **Suspicious Mod** (or **Sus Mod**) is a mod for Balatro which adds a new Suit and items to go with it.
